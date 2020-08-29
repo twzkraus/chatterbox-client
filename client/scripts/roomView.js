@@ -1,11 +1,12 @@
-var MessageView = {
-
+var RoomView = {
   render: _.template(`
-      <div class="chat">
-        <div class="username"><%= username %></div>
-        <div><%= text %></div>
-      </div>
-    `)
+  <option value=<%= room.split(' ').join('-') %>><%= room %></option>
+  `)
+};
+
+
+
+
     /*
     Example message data:
     createdAt: "2020-07-24T04:02:14.890Z"
@@ -15,5 +16,3 @@ var MessageView = {
     updatedAt: "2020-07-24T04:02:14.890Z"
     username: "test"
 */
-
-};
