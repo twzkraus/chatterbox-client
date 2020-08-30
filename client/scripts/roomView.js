@@ -1,6 +1,6 @@
 var RoomView = {
   render: _.template(`
-  <option value=<%= room.split(' ').join('-') %>><%= room %></option>
+  <option value=<%= room.split(' ').join('-') %>><%- room %></option>
   `)
 };
 

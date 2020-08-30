@@ -4,6 +4,7 @@ var MessagesView = {
 
   initialize: function() {
     MessagesView.render();
+    MessagesView.$chats.on('click', MessagesView.addFriend);
   },
 
   render: function() {
@@ -11,28 +12,25 @@ var MessagesView = {
     console.log('rendering messages', Messages.storedMessages);
     for (let i = 0; i < Messages.storedMessages.length; i++) {
       let thisMessage = Messages.storedMessages[i];
-      // check roomname against currently selected roomname
+
       if (thisMessage.roomname) {
         if (thisMessage.roomname.split(' ').join('-') === $('#rooms select option:selected')[0].value) {
           MessagesView.$chats.append(MessageView.render(thisMessage));
         }
       }
     }
+    Friends.showFriends();
+  },
+
+  addFriend: function(event) {
+    console.log('youve activated addFriend');
+    let classList = event.target.className.split(' ');
+    classList.forEach((thisClass) => {
+      if (thisClass.slice(0, 2) === 'u-') {
+        Friends.storedFriends['.' + thisClass] = '.' + thisClass;
+      }
+    });
+    // trigger friends.showFriends to highlight friends
+    Friends.showFriends();
   }
-
-    // inputs: Messages array
-
-    // key pieces: iterate over messages, selectively add them to the chats box, check roomname,
-
-    // outputs: room messages displayed on the DOM
-
-    // justification:
-    // explanation: Iterate over the messages, check each roomname against the currently selected roomname, and add to chats if there's a match
-
-
 };
-
-
-// doesn't look at messageView yet
-
-// all messages will go inside chat div
