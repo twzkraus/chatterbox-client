@@ -4,13 +4,9 @@ var Parse = {
 
   create: function(message, successCB, errorCB = null) {
     $.ajax({
-      url: Parse.server,
+      url: 'http://parse.hrr.hackreactor.com/chatterbox/classes/messages',
       type: 'POST',
-      data: {
-        roomname: $('#rooms select option:selected')[0].value,
-        text: JSON.stringify(message),
-        username: App.username
-      },
+      data: JSON.stringify(message),
       contentType: 'application/json',
       success: successCB,
       error: errorCB || function(error) {

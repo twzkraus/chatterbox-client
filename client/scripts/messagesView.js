@@ -4,6 +4,7 @@ var MessagesView = {
 
   initialize: function() {
     MessagesView.render();
+    MessagesView.$chats.on('click', MessagesView.addFriend);
   },
 
   render: function() {
@@ -18,5 +19,18 @@ var MessagesView = {
         }
       }
     }
+    Friends.showFriends();
+  },
+
+  addFriend: function(event) {
+    console.log('youve activated addFriend');
+    let classList = event.target.className.split(' ');
+    classList.forEach((thisClass) => {
+      if (thisClass.slice(0, 2) === 'u-') {
+        Friends.storedFriends['.' + thisClass] = '.' + thisClass;
+      }
+    });
+    // trigger friends.showFriends to highlight friends
+    Friends.showFriends();
   }
 };

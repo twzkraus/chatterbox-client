@@ -19,6 +19,7 @@ var RoomsView = {
   },
 
   render: function() {
+    RoomsView.$select.html('');
     for (let room in Rooms.storedRooms) {
       RoomsView.$select.append(RoomView.render({'room': room}));
     }

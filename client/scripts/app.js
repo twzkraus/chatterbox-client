@@ -5,7 +5,7 @@ var App = {
   username: 'anonymous',
 
   initialize: function() {
-    App.username = window.location.search.substr(10);
+    App.username = decodeURI(window.location.search.substr(10));
     App.startSpinner();
     App.fetch(function() {
       FormView.initialize();
@@ -14,14 +14,18 @@ var App = {
       App.stopSpinner();
     });
     // Fetch initial batch of messages
-
+    setInterval(function() {
+      App.fetch(function() {
+        RoomsView.render();
+        MessagesView.render();
+      });
+    }, 5000);
   },
 
   // Figure out what callback does
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      console.log('I happen first');
       Messages.storedMessages = data.results;
 
       for (let i = 0; i < data.results.length; i++) {

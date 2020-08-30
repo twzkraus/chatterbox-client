@@ -91,3 +91,7 @@ form input[type=text] {
 .hidden {
     display: none;
 }
+
+.username:hover {
+    cursor: pointer;
+}
